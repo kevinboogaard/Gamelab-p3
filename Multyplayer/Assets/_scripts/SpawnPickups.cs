@@ -12,8 +12,13 @@ public class SpawnPickups : MonoBehaviour {
     public Transform borderLeft;
     public Transform borderRight;
 
+    void Awake()
+    {
+        if (!GetComponent<NetworkView>().isMine)
+            Begin();
+    }
 
-    void Start() {
+    void Begin() {
         InvokeRepeating("Spawn", 3, 10);
     }
 
