@@ -9,11 +9,13 @@ public class Snake : MonoBehaviour {
     private List<Transform> tail = new List<Transform>();
     private bool ate = false;
     private Vector2 movedDir;
+    private float speed = 0.3f;
+    private bool speedChange = false;
 
     public GameObject tailPrefab;
 
     void Start() {
-        InvokeRepeating("Move", 0.3f, 0.3f);
+        InvokeRepeating("Move", speed, speed);
     }
 
     void Update() {
@@ -72,13 +74,26 @@ public class Snake : MonoBehaviour {
         if (tail.Count > 0) {
             tail.Last().GetComponent<ChangeTailArt>().ChangeArt(true);
         }
+        if (speedChange == true) {
+            CancelInvoke("Move");
+            InvokeRepeating("Move", speed, speed);
+        }
     }
     void OnTriggerEnter2D(Collider2D coll) {
-        if (coll.tag == "pickup") {
+        if (coll.tag == "growPickup") {
             ate = true;
-
-            Destroy(coll.gameObject);
         }
+        else if (coll.tag == "speedUpPickup") {
+            if (speed > 0.1f) {
+                speed -= 0.1f;
+            }
+            speedChange = true;
+        }
+        else if(coll.tag == "speedDownPickup") {
+            speed += 0.1f;
+            speedChange = true;
+        }
+        Destroy(coll.gameObject);
     }
     void OnCollisionEnter2D(Collision2D coll) {
         Debug.Log("death " + gameObject.name);
