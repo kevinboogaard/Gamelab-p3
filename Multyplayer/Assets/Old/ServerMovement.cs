@@ -15,7 +15,7 @@ public class ServerMovement : MonoBehaviour
 
         if (GetComponent<NetworkView>().isMine)
         {
-            Vector3 moveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            Vector3 moveDir = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0);
             float speed = 5;
             transform.Translate(speed * moveDir * Time.deltaTime);
 

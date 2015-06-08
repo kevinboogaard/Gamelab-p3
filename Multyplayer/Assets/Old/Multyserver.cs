@@ -19,4 +19,9 @@ public class Multyserver : MonoBehaviour {
     {
         Transform myTransform = (Transform)Network.Instantiate(cubePrefab, transform.position, transform.rotation, 0);
     }
+
+    void RemovePlayer()
+    {
+        Destroy(cubePrefab);
+    }
 }
