@@ -6,7 +6,7 @@ using System.Linq;
 public class Snake : MonoBehaviour {
 
     public Vector2 dir = Vector2.right;
-    private List<Transform> tail = new List<Transform>();
+    private List<GameObject> tail = new List<GameObject>();
     private bool ate = false;
     private Vector2 movedDir;
     private float speed = 0.3f;
@@ -81,12 +81,12 @@ public class Snake : MonoBehaviour {
         if (ate) {
             GameObject g = (GameObject)Instantiate(tailPrefab, v, Quaternion.identity);
             g.transform.rotation = Quaternion.AngleAxis(rotationTail, Vector3.back);
-            tail.Insert(0, g.transform);
+            tail.Insert(0, g);
 
             ate = false;
         }
         else if (tail.Count > 0) {
-            tail.Last().position = v;
+            tail.Last().transform.position = v;
             tail.Last().transform.rotation = Quaternion.AngleAxis(rotationTail, Vector3.back);
 
             tail.Insert(0, tail.Last());
@@ -121,7 +121,9 @@ public class Snake : MonoBehaviour {
     }
     void OnCollisionEnter2D(Collision2D coll) {
         Debug.Log("death " + gameObject.name);
+        CancelInvoke("Move");
         for (int i = 0; i < tail.Count; i++) {
+            Debug.Log(i + " " + tail.Count);
             Destroy(tail[i]);
         }
         Destroy(gameObject);
