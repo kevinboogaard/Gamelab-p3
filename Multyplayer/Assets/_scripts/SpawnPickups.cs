@@ -12,8 +12,29 @@ public class SpawnPickups : MonoBehaviour {
     public Transform borderLeft;
     public Transform borderRight;
 
+    void Awake()
+    {
+        if (!GetComponent<NetworkView>().isMine)
+            enabled = false;
+    }
+
     void Start() {
         InvokeRepeating("Spawn", 3, 10);
+    }
+
+    void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            Vector3 myPosition = transform.position;
+            stream.Serialize(ref myPosition);
+        }
+        else
+        {
+            Vector3 receivedPosition = Vector3.zero;
+            stream.Serialize(ref receivedPosition);
+            transform.position = receivedPosition;
+        }
     }
 
     void Spawn() {
