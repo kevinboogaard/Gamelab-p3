@@ -72,7 +72,7 @@ public class Snake : MonoBehaviour {
             tail.RemoveAt(tail.Count - 1);
         }
         if (tail.Count > 0) {
-            tail.Last().GetComponent<ChangeTailArt>().ChangeArt(true);
+            tail.Last().GetComponent<ChangeTailArt>().ChangeArt(true, speed);
         }
         if (speedChange == true) {
             CancelInvoke("Move");
@@ -82,16 +82,19 @@ public class Snake : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D coll) {
         if (coll.tag == "growPickup") {
             ate = true;
+            Debug.Log("GrowPickup " + name);
         }
         else if (coll.tag == "speedUpPickup") {
-            if (speed > 0.1f) {
+            if (speed > 0.15f) {
                 speed -= 0.1f;
+                speedChange = true;
+                Debug.Log("speedUpPickup " + name + " " + speed);
             }
-            speedChange = true;
         }
         else if(coll.tag == "speedDownPickup") {
             speed += 0.1f;
             speedChange = true;
+            Debug.Log("speedDownPickup " + name + " " + speed);
         }
         Destroy(coll.gameObject);
     }

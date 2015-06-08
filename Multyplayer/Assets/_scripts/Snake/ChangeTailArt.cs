@@ -11,16 +11,16 @@ public class ChangeTailArt : MonoBehaviour {
         spriterenderer = GetComponent<SpriteRenderer>();
     }
 
-    public void ChangeArt(bool tail) {
+    public void ChangeArt(bool tail, float speed) {
         if (tail == true) {
             spriterenderer.sprite = tailSprite;
-            Invoke("ChangeBack", 0.3f);
+            Invoke("ChangeBack", speed);
         }
         else {
             spriterenderer.sprite = bodySprite;
         }
     }
     void ChangeBack() {
-        ChangeArt(false);
+        ChangeArt(false, 0);
     }
 }
