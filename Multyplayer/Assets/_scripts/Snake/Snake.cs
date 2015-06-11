@@ -20,8 +20,9 @@ public class Snake : MonoBehaviour {
 
     void Awake()
     {
-        if (!GetComponent<NetworkView>().isMine)
-            enabled = false;
+        if (!GetComponent<NetworkView>().isMine) {
+            //enabled = false;
+        }
     }
 
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
@@ -39,17 +40,17 @@ public class Snake : MonoBehaviour {
         }
     }
 
-    void Update() {
-        if (Input.GetKey(KeyCode.RightArrow) && movedDir != -Vector2.right) {
+    public void ChangeDir(Vector2 dir) {
+        if (dir == Vector2.right && movedDir != -Vector2.right) {
             dir = Vector2.right;
         }
-        else if (Input.GetKey(KeyCode.DownArrow) && movedDir != Vector2.up) {
+        else if (dir == -Vector2.up && movedDir != Vector2.up) {
             dir = -Vector2.up;
         }
-        else if (Input.GetKey(KeyCode.LeftArrow) && movedDir != Vector2.right) {
+        else if (dir == -Vector2.right && movedDir != Vector2.right) {
             dir = -Vector2.right;
         }
-        else if (Input.GetKey(KeyCode.UpArrow) && movedDir != -Vector2.up) {
+        else if (dir == Vector2.up && movedDir != -Vector2.up) {
             dir = Vector2.up;
         }
     }
@@ -123,7 +124,6 @@ public class Snake : MonoBehaviour {
         Debug.Log("death " + gameObject.name);
         CancelInvoke("Move");
         for (int i = 0; i < tail.Count; i++) {
-            Debug.Log(i + " " + tail.Count);
             Destroy(tail[i]);
         }
         Destroy(gameObject);
