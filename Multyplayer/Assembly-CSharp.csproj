@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\_scripts\Network\Multyserver.cs" />
+     <Compile Include="Assets\_scripts\Network\NetworkClass.cs" />
      <Compile Include="Assets\_scripts\Network\NetworkManager.cs" />
      <Compile Include="Assets\_scripts\Network\Server.cs" />
      <Compile Include="Assets\_scripts\Network\ServerMovement.cs" />
