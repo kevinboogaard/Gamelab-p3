@@ -41,17 +41,18 @@ public class Snake : MonoBehaviour {
         }
     }
 
-    public void ChangeDir(Vector2 dir) {
-        if (dir == Vector2.right && movedDir != -Vector2.right) {
+    public void ChangeDir(Vector2 direction) {
+        Debug.Log(dir + " ChangeDir");
+        if (direction == Vector2.right && movedDir != -Vector2.right) {
             dir = Vector2.right;
         }
-        else if (dir == -Vector2.up && movedDir != Vector2.up) {
+        else if (direction == -Vector2.up && movedDir != Vector2.up) {
             dir = -Vector2.up;
         }
-        else if (dir == -Vector2.right && movedDir != Vector2.right) {
+        else if (direction == -Vector2.right && movedDir != Vector2.right) {
             dir = -Vector2.right;
         }
-        else if (dir == Vector2.up && movedDir != -Vector2.up) {
+        else if (direction == Vector2.up && movedDir != -Vector2.up) {
             dir = Vector2.up;
         }
     }

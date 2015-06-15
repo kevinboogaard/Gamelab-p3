@@ -54,6 +54,7 @@
      <Compile Include="Assets\_scripts\Snake\ChangeTailArt.cs" />
      <Compile Include="Assets\_scripts\Snake\Snake.cs" />
      <Compile Include="Assets\_scripts\Snake\SnakeControlls.cs" />
+     <Compile Include="Assets\_scripts\SpawnObstacles.cs" />
      <Compile Include="Assets\_scripts\SpawnPickups.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
