@@ -11,6 +11,7 @@ public class Snake : MonoBehaviour {
     private Vector2 movedDir;
     private float speed = 0.3f;
     private bool speedChange = false;
+    private bool enabled = true;
 
     public GameObject tailPrefab;
 
@@ -21,7 +22,7 @@ public class Snake : MonoBehaviour {
     void Awake()
     {
         if (!GetComponent<NetworkView>().isMine) {
-            //enabled = false;
+            enabled = false;
         }
     }
 

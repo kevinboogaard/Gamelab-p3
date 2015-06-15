@@ -6,7 +6,7 @@ public class Server : MonoBehaviour {
     public string connectionIP = "127.0.0.1";
     public int connectionPort = 25001;
 
-    void OnGUI()
+    public void OnGUI()
     { 
         if (Network.peerType == NetworkPeerType.Disconnected)
         {

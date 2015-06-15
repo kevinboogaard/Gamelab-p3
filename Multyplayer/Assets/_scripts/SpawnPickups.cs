@@ -12,14 +12,20 @@ public class SpawnPickups : MonoBehaviour {
     public Transform borderLeft;
     public Transform borderRight;
 
-    void Awake()
+    private bool server = true;
+
+    void Update()
     {
-        if (!GetComponent<NetworkView>().isMine)
+        if (Network.isServer == true && server == true)
+        {
             Begin();
+            server = false;
+        }
     }
 
     void Begin() {
-        InvokeRepeating("Spawn", 3, 10);
+        
+        InvokeRepeating("Spawn", 0, 1);
     }
 
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
