@@ -50,7 +50,6 @@ public class SpawnPickups : MonoBehaviour {
 
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(x, y),Vector2.up, 0.1f);
         if (hit.collider != null) {
-            Debug.Log("raycast hit object, choosing different location " + antiLoop);
             if (antiLoop < 30) {
                 Spawn();
                 antiLoop++;

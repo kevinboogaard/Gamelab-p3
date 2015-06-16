@@ -44,5 +44,6 @@ public class SpawnObstacles : MonoBehaviour {
                 }
             }
         }
+        Destroy(this);
 	}
 }
