@@ -14,17 +14,18 @@ public class SpawnPickups : MonoBehaviour {
 
     private bool server = true;
 
-    void Update()
+    private int antiLoop = 0;
+
+    /*void Update()
     {
         if (Network.isServer == true && server == true)
         {
             Begin();
             server = false;
         }
-    }
+    }*/
 
-    void Begin() {
-        
+    void Start() {
         InvokeRepeating("Spawn", 0, 1);
     }
 
@@ -47,15 +48,29 @@ public class SpawnPickups : MonoBehaviour {
         int x = (int)Random.Range(borderLeft.position.x, borderRight.position.x);
         int y = (int)Random.Range(borderBottom.position.y, borderTop.position.y);
 
-        int Q = Random.Range(0, 3);
-        if (Q == 0) {
-            Instantiate(growPrefab, new Vector2(x, y), Quaternion.identity);
-        }
-        else if (Q == 1) {
-            Instantiate(speedUpPrefab, new Vector2(x, y), Quaternion.identity);
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(x, y),Vector2.up, 0.1f);
+        if (hit.collider != null) {
+            Debug.Log("raycast hit object, choosing different location " + antiLoop);
+            if (antiLoop < 30) {
+                Spawn();
+                antiLoop++;
+            }
+            else {
+                antiLoop = 0;
+            }
         }
         else {
-            Instantiate(speedDownPrefab, new Vector2(x, y), Quaternion.identity);
+            antiLoop = 0;
+            int Q = Random.Range(0, 4);
+            if (Q == 0) {
+                Instantiate(growPrefab, new Vector2(x, y), Quaternion.identity);
+            }
+            else if (Q == 1 || Q == 2) {
+                Instantiate(speedUpPrefab, new Vector2(x, y), Quaternion.identity);
+            }
+            else {
+                Instantiate(speedDownPrefab, new Vector2(x, y), Quaternion.identity);
+            }
         }
     }
 }

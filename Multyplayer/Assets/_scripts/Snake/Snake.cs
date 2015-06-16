@@ -7,7 +7,7 @@ public class Snake : MonoBehaviour {
 
     public Vector2 dir = Vector2.right;
     private List<GameObject> tail = new List<GameObject>();
-    private bool ate = false;
+    private bool ate = true;
     private Vector2 movedDir;
     private float speed = 0.3f;
     private bool speedChange = false;
@@ -110,7 +110,7 @@ public class Snake : MonoBehaviour {
         }
         else if (coll.tag == "speedUpPickup") {
             if (speed > 0.15f) {
-                speed -= 0.1f;
+                speed -= 0.05f;
                 speedChange = true;
                 Debug.Log("speedUpPickup " + name + " " + speed);
             }
