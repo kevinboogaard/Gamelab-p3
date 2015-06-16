@@ -10,8 +10,7 @@ public class SpawnObstacles : MonoBehaviour {
     public Transform borderBottom;
     public Transform borderLeft;
     public Transform borderRight;
-    
-    private int antiLoop = 0;
+
     void Start() {
         Spawn();
     }
@@ -26,13 +25,21 @@ public class SpawnObstacles : MonoBehaviour {
             RaycastHit2D hit1 = Physics2D.Raycast(new Vector2(x, y-1),Vector2.up, 2);
             RaycastHit2D hit2 = Physics2D.Raycast(new Vector2(x, y), Vector2.up, 2);
             RaycastHit2D hit3 = Physics2D.Raycast(new Vector2(x, y + 1), Vector2.up, 2);
-            if (hit1.collider == null || hit2.collider == null || hit3 == null) {
+            if (hit1.collider == false || hit2.collider == false || hit3 == false) {
                 int Q = Random.Range(0, 2);
                 if (Q == 0) {
                     Instantiate(obstacle1, new Vector2(x, y), Quaternion.identity);
                 }
                 else {
                     Instantiate(obstacle2, new Vector2(x, y), Quaternion.identity);
+                }
+            }
+            else {
+                if(obstacles > 10){
+                    obstacles = 0;
+                }
+                else {
+                    obstacles++;
                 }
             }
         }
