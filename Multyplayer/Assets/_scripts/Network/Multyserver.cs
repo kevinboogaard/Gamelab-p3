@@ -7,7 +7,7 @@ public class Multyserver : MonoBehaviour {
 
     void OnServerInitialized()
     {
-        SpawnPlayer();
+       SpawnPlayer();
     }
 
     void OnConnectedToServer()

@@ -43,11 +43,22 @@ public class SpawnPickups : MonoBehaviour {
             transform.position = receivedPosition;
         }
     }
-
+    [RPC]
     void Spawn() {
         int x = (int)Random.Range(borderLeft.position.x, borderRight.position.x);
         int y = (int)Random.Range(borderBottom.position.y, borderTop.position.y);
 
+<<<<<<< HEAD
+        int Q = Random.Range(0, 3);
+        if (Q == 0) {
+            Network.Instantiate(growPrefab, new Vector2(x, y), Quaternion.identity,0);
+        }
+        else if (Q == 1) {
+            Network.Instantiate(speedUpPrefab, new Vector2(x, y), Quaternion.identity,0);
+        }
+        else {
+            Network.Instantiate(speedDownPrefab, new Vector2(x, y), Quaternion.identity,0);
+=======
         RaycastHit2D hit = Physics2D.Raycast(new Vector2(x, y),Vector2.up, 0.1f);
         if (hit.collider != null) {
             if (antiLoop < 30) {
@@ -70,6 +81,7 @@ public class SpawnPickups : MonoBehaviour {
             else {
                 Instantiate(speedDownPrefab, new Vector2(x, y), Quaternion.identity);
             }
+>>>>>>> origin/master
         }
     }
 }

@@ -11,12 +11,11 @@ public class Snake : MonoBehaviour {
     private Vector2 movedDir;
     private float speed = 0.3f;
     private bool speedChange = false;
-    private bool enabled = true;
 
     public GameObject tailPrefab;
 
     void Start() {
-        InvokeRepeating("Move", speed, speed);
+        InvokeRepeating("Move", 0, speed);
     }
 
     void Awake()
@@ -82,7 +81,7 @@ public class Snake : MonoBehaviour {
         }
         transform.rotation = Quaternion.AngleAxis(rotation, Vector3.back);
         if (ate) {
-            GameObject g = (GameObject)Instantiate(tailPrefab, v, Quaternion.identity);
+            GameObject g = (GameObject)Network.Instantiate(tailPrefab, v, Quaternion.identity,0);
             g.transform.rotation = Quaternion.AngleAxis(rotationTail, Vector3.back);
             tail.Insert(0, g);
 
