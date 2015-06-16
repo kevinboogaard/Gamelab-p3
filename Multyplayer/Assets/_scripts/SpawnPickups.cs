@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SpawnPickups : MonoBehaviour {
+public class SpawnPickups : MonoBehaviour
+{
 
     public GameObject growPrefab;
     public GameObject speedUpPrefab;
@@ -16,16 +17,17 @@ public class SpawnPickups : MonoBehaviour {
 
     private int antiLoop = 0;
 
-    /*void Update()
+    void Update()
     {
         if (Network.isServer == true && server == true)
         {
             Begin();
             server = false;
         }
-    }*/
+    }
 
-    void Start() {
+    void Begin()
+    {
         InvokeRepeating("Spawn", 0, 1);
     }
 
@@ -44,45 +46,40 @@ public class SpawnPickups : MonoBehaviour {
         }
     }
     [RPC]
-    void Spawn() {
+    void Spawn()
+    {
         int x = (int)Random.Range(borderLeft.position.x, borderRight.position.x);
         int y = (int)Random.Range(borderBottom.position.y, borderTop.position.y);
 
-<<<<<<< HEAD
-        int Q = Random.Range(0, 3);
-        if (Q == 0) {
-            Network.Instantiate(growPrefab, new Vector2(x, y), Quaternion.identity,0);
-        }
-        else if (Q == 1) {
-            Network.Instantiate(speedUpPrefab, new Vector2(x, y), Quaternion.identity,0);
-        }
-        else {
-            Network.Instantiate(speedDownPrefab, new Vector2(x, y), Quaternion.identity,0);
-=======
-        RaycastHit2D hit = Physics2D.Raycast(new Vector2(x, y),Vector2.up, 0.1f);
-        if (hit.collider != null) {
-            Debug.Log("raycast hit object, choosing different location " + antiLoop);
-            if (antiLoop < 30) {
+        RaycastHit2D hit = Physics2D.Raycast(new Vector2(x, y), Vector2.up, 0.1f);
+        if (hit.collider != null)
+        {
+            if (antiLoop < 30)
+            {
                 Spawn();
                 antiLoop++;
             }
-            else {
+            else
+            {
                 antiLoop = 0;
             }
         }
-        else {
+        else
+        {
             antiLoop = 0;
             int Q = Random.Range(0, 4);
-            if (Q == 0) {
+            if (Q == 0)
+            {
                 Instantiate(growPrefab, new Vector2(x, y), Quaternion.identity);
             }
-            else if (Q == 1 || Q == 2) {
+            else if (Q == 1 || Q == 2)
+            {
                 Instantiate(speedUpPrefab, new Vector2(x, y), Quaternion.identity);
             }
-            else {
+            else
+            {
                 Instantiate(speedDownPrefab, new Vector2(x, y), Quaternion.identity);
             }
->>>>>>> origin/master
         }
     }
 }

@@ -12,8 +12,28 @@ public class SpawnObstacles : MonoBehaviour {
     public Transform borderRight;
     
     private int antiLoop = 0;
-    void Start() {
-        Spawn();
+
+    void Update()
+    {
+        if (Network.isServer == true)
+        {
+            Spawn();
+        }
+    }
+
+    void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+    {
+        if (stream.isWriting)
+        {
+            Vector3 myPosition = transform.position;
+            stream.Serialize(ref myPosition);
+        }
+        else
+        {
+            Vector3 receivedPosition = Vector3.zero;
+            stream.Serialize(ref receivedPosition);
+            transform.position = receivedPosition;
+        }
     }
 
 	void Spawn () {
