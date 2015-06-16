@@ -17,15 +17,14 @@ public class SpawnObstacles : MonoBehaviour {
     }
 
 	void Spawn () {
-        int obstacles = Random.Range(0, 6);
+        int obstacles = Random.Range(0, 5);
         //Debug.Log(obstacles);
         for (int i = 0; i < obstacles; i++) {
-            int x = (int)Random.Range(borderLeft.position.x, borderRight.position.x);
-            int y = (int)Random.Range(borderBottom.position.y, borderTop.position.y);
+            int x = (int)Random.Range(borderLeft.position.x+1, borderRight.position.x-1);
+            int y = (int)Random.Range(borderBottom.position.y+1, borderTop.position.y-1);
 
             RaycastHit2D hit = Physics2D.Raycast(new Vector2(x, y),Vector2.up, 0.1f);
             if (hit.collider != null) {
-                Debug.Log("raycast hit object, choosing different location " + antiLoop);
                 if (antiLoop < 100) {
                     Spawn();
                     antiLoop++;
