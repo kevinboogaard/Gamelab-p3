@@ -3,6 +3,14 @@ using System.Collections;
 
 public class NetworkClass : MonoBehaviour {
 
+    void Awake()
+    {
+        if (!GetComponent<NetworkView>().isMine)
+        {
+            enabled = false;
+        }
+    }
+
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
     {
         if (stream.isWriting)
