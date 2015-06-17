@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Multyserver : MonoBehaviour {
 
     public Transform cubePrefab;
+    public List<Transform> playerList = new List<Transform>();
 
     void OnServerInitialized()
     {
@@ -17,7 +19,7 @@ public class Multyserver : MonoBehaviour {
 
     void SpawnPlayer()
     {
-        Transform myTransform = (Transform)Network.Instantiate(cubePrefab, transform.position, transform.rotation, 0);
+        playerList.Add((Transform)Network.Instantiate(cubePrefab, transform.position, transform.rotation, 0));
     }
 
     void RemovePlayer()
