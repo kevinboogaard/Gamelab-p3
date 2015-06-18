@@ -17,7 +17,7 @@ public class Multyserver : MonoBehaviour {
         SpawnPlayer();
     }
 
-    void SpawnPlayer()
+    public void SpawnPlayer()
     {
         playerList.Add((Transform)Network.Instantiate(cubePrefab, transform.position, transform.rotation, 0));
     }
