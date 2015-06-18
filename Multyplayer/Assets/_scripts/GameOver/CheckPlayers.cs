@@ -17,26 +17,25 @@ public class CheckPlayers : MonoBehaviour {
     }
     void Start() {
         endScreen.SetActive(false);
-        InvokeRepeating("CheckSnakes", 0.25f, 0.25f);
+        InvokeRepeating("CheckSnakes", 0, 0.25f);
     }
     void CheckSnakes() {
+        Debug.Log(multyserver.playerList.Count);
         if (multyserver.playerList.Count > players) {
-            players++;
+            players = multyserver.playerList.Count;
             if (players > 1) {
                 multiplayer = true;
             }
         }
         else if (multyserver.playerList.Count < players) {
-            players--;
+            players = multyserver.playerList.Count;
             if (players == 1 && multiplayer == true) {
                 endScreen.SetActive(true);
-                multiplayerScreen.SetActive(false);
-                singleplayerScreen.SetActive(true);
+                multiplayerScreen.SetActive(true);
             }
             else if (players == 0) {
                 endScreen.SetActive(true);
-                multiplayerScreen.SetActive(true);
-                singleplayerScreen.SetActive(false);
+                singleplayerScreen.SetActive(true);
             }
         }
     }

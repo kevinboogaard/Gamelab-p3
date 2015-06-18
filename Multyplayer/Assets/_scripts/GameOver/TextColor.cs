@@ -7,11 +7,9 @@ public class TextColor : MonoBehaviour {
     private Text text;
     private CheckPlayers checkplayer;
 
-    void Awake() {
+    void OnEnable() {
         text = GetComponent<Text>();
         checkplayer = GetComponentInParent<CheckPlayers>();
-    }
-    void OnEnable() {
         UpdateColor();
     }
     void UpdateColor() {
