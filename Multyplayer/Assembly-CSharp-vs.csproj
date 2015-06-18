@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\_scripts\GameOver\CheckPlayers.cs" />
+     <Compile Include="Assets\_scripts\GameOver\RestartScene.cs" />
      <Compile Include="Assets\_scripts\GameOver\TextColor.cs" />
      <Compile Include="Assets\_scripts\MenuScript.cs" />
      <Compile Include="Assets\_scripts\Network\Multyserver.cs" />
