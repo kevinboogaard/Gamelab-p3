@@ -10,7 +10,14 @@ public class MenuScript : MonoBehaviour {
     public GameObject startButtonB;
     public GameObject optionsButtonB;
     public GameObject quitButtonB;
+    public GameObject connect;
+    public GameObject connectB;
+    public GameObject host;
+    public GameObject hostB;
     public GameObject menu;
+
+    public string connectionIP = "127.0.0.1";
+    public int connectionPort = 25001;
 	// Use this for initialization
 	void Start () {
         Cursor.visible = false;
@@ -50,9 +57,25 @@ public class MenuScript : MonoBehaviour {
             optionsButtonB.SetActive(true);
         }
 
-        if (startButtonB.active == true && Input.GetKeyDown(KeyCode.KeypadEnter))
+        if (startButtonB.active == true && Input.GetKeyDown(KeyCode.RightArrow)&& hostB.active == true)
         {
-            
+            hostB.SetActive(false);
+            connectB.SetActive(true);
+        }
+        else if (startButtonB.active == true && Input.GetKeyDown(KeyCode.RightArrow) && connectB.active == true)
+        {
+            hostB.SetActive(true);
+            connectB.SetActive(false);
+        }
+        if (startButtonB.active == true && Input.GetKeyDown(KeyCode.KeypadEnter) && connectB.active == true)
+        {
+            Network.Connect(connectionIP, connectionPort);
+            menu.SetActive(false);
+        }
+        else if (startButtonB.active == true && Input.GetKeyDown(KeyCode.KeypadEnter) && hostB.active == true)
+        {
+            Network.InitializeServer(32, connectionPort, false);
+            menu.SetActive(false);
         }
 	}
 }
